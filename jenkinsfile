@@ -1,5 +1,6 @@
 node{
     def mavenHome=tool name: 'maven 3.9.3'
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
     stage('checkout code'){
         git branch: 'development', credentialsId: 'e594bf74-631b-4856-812d-458422f968eb', url: 'https://github.com/isbcbankapp/maven-web-application.git'
     }
