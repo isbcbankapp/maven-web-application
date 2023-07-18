@@ -1,0 +1,26 @@
+node{
+    def mavenHome=tool name: 'maven 3.9.3'
+    stage('checkout code'){
+        git branch: 'development', credentialsId: 'e594bf74-631b-4856-812d-458422f968eb', url: 'https://github.com/isbcbankapp/maven-web-application.git'
+    }
+    stage('Build'){
+        sh"${mavenHome}/bin/mvn clean package"
+        
+    } //buildclose
+/*
+     stage('executesonarqube report'){
+      
+      sh"${mavenHome}/bin/mvn sonar:sonar"
+      } //sonar report
+    stage('upload artifact into nexus'){
+        
+     sh"${mavenHome}/bin/mvn deploy"
+    }
+    stage('deploy'){
+        sshagent(['3b3b09d4-67d1-42b5-a4c5-0bdff791aec3']) {
+   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.8.109:/opt/apache-tomcat-9.0.75/webapps/"
+   // some block
+}
+    }
+*/
+}
